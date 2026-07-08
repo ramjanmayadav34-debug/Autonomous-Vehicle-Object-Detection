@@ -1,0 +1,45 @@
+project_name: autonomous_vehicle_detection
+seed: 42
+device: auto
+mixed_precision: true
+batch_size: 16
+num_workers: 4
+image_size: 640
+epochs: 5
+learning_rate: 0.001
+weight_decay: 0.0001
+patience: 3
+checkpoint_dir: checkpoints
+output_dir: outputs
+log_dir: outputs/runs
+dataset:
+  gtsrb_root: datasets/gtsrb
+  kitti_root: datasets/kitti
+  coco_root: datasets/coco
+  bdd_root: datasets/bdd100k
+  mapillary_root: datasets/mapillary
+  lisa_root: datasets/lisa
+model:
+  weights_path: yolov8n.pt
+  traffic_sign_model: mobilenet_v3_small
+  pedestrian_model: yolov8n.pt
+  confidence_threshold: 0.25
+  iou_threshold: 0.45
+  classes:
+    - car
+    - truck
+    - bus
+    - motorcycle
+    - bicycle
+    - pedestrian
+    - traffic_sign
+    - traffic_light
+    - lane_marking
+logging:
+  level: INFO
+backend:
+  host: 0.0.0.0
+  port: 8000
+frontend:
+  host: 0.0.0.0
+  port: 8501
